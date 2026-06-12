@@ -1,0 +1,3 @@
+# Javagrad
+
+Javagrad is a Java implementation of the core ideas behind Karpathy's Micrograd: scalar `Value` objects build a computation graph during the forward pass. Each `Value` stores its data, gradient, previous nodes, and a small backward function that applies the local chain rule. Calling `backward()` topologically sorts the graph, seeds the final output gradient as `1.0`, and runs each backward function in reverse order. On top of this engine, we implemented `Neuron`, `Layer`, and `MLP` classes so a small neural network can be built from reusable components. Finally, we trained the network by computing a squared-error loss, backpropagating through it, and updating parameters with gradient descent.

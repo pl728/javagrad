@@ -117,6 +117,14 @@ public class Value {
         return this.grad;
     }
 
+    public void zeroGrad() {
+        this.grad = 0.0;
+    }
+
+    public void step(double learningRate) {
+        this.data += -learningRate * this.grad;
+    }
+
     private static void buildTopological(Value v, List<Value> topo, Set<Value> visited) {
         if (visited.contains(v)) {
             return;
