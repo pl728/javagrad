@@ -59,6 +59,19 @@ public class Value {
         return out;
     }
 
+    public Value tanh() {
+        Set<Value> prev = new HashSet<>();
+        prev.add(this);
+
+        Value out = new Value(Math.tanh(this.data), "tanh", prev);
+        
+        out.backFn = () -> {
+            this.grad += (1 - out.data * out.data) * out.grad;
+        };
+
+        return out;
+    }
+
     public void backward() {
         List<Value> topo = new ArrayList<>();
         Set<Value> visited = new HashSet<>();
