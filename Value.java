@@ -44,6 +44,10 @@ public class Value {
         return out;
     }
 
+    public Value add(double d) {
+        return this.add(new Value(d));
+    }
+
     public Value mul(Value other) {
         Set<Value> prev = new HashSet<>();
         prev.add(this);
@@ -59,6 +63,10 @@ public class Value {
         return out;
     }
 
+    public Value mul(double d) {
+        return this.mul(new Value(d));
+    }
+
     public Value tanh() {
         Set<Value> prev = new HashSet<>();
         prev.add(this);
@@ -70,6 +78,14 @@ public class Value {
         };
 
         return out;
+    }
+
+    public Value neg() {
+        return this.mul(-1.0);
+    }
+
+    public Value sub(Value other) {
+        return this.add(other.neg());
     }
 
     public void backward() {
@@ -85,7 +101,7 @@ public class Value {
         }
     }
 
-    public Double getGrad() {
+    public double getGrad() {
         return this.grad;
     }
 
