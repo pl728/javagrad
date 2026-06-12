@@ -88,6 +88,18 @@ public class Value {
         return this.add(other.neg());
     }
 
+    public Value pow(double exponent) {
+        Set<Value> prev = new HashSet<>();
+        prev.add(this);
+
+        Value out = new Value(Math.pow(this.data, exponent), "^", prev);
+
+        out.backFn = () -> {
+            this.grad += out.grad * exponent * Math.pow(this.data, exponent - 1);
+        };
+        return out;
+    }
+
     public void backward() {
         List<Value> topo = new ArrayList<>();
         Set<Value> visited = new HashSet<>();
